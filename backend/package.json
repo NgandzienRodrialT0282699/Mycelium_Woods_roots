@@ -1,7 +1,7 @@
 {
-  "name": "toto-backend",
+  "name": "mycelium-woods-roots-backend",
   "version": "1.0.0",
-  "description": "Toto - réseau social léger",
+  "description": "Mycelium Woods roots - réseau social léger",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
