@@ -1,4 +1,4 @@
-# Toto — Réseau social léger
+# Mycelium Woods roots — Réseau social léger
 
 Un clone Twitter léger, mobile-first, conteneurisé avec Docker.
 
@@ -14,7 +14,7 @@ Un clone Twitter léger, mobile-first, conteneurisé avec Docker.
 ## Lancer le projet
 
 ```bash
-docker compose up --build
+docker-compose up --build
 ```
 
 Puis ouvrir [http://localhost:8080](http://localhost:8080)

@@ -3,18 +3,18 @@ version: "3.9"
 services:
   db:
     image: postgres:16-alpine
-    container_name: toto_db
+    container_name: mycelium-woods-roots-db
     environment:
-      POSTGRES_USER: toto
-      POSTGRES_PASSWORD: toto_secret
-      POSTGRES_DB: toto_db
+      POSTGRES_USER: mycelium
+      POSTGRES_PASSWORD: mycelium_secret
+      POSTGRES_DB: mycelium_woods_roots_db
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./backend/src/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
     ports:
       - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U toto -d toto_db"]
+      test: ["CMD-SHELL", "pg_isready -U mycelium -d mycelium_woods_roots_db"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -26,9 +26,9 @@ services:
         HTTP_PROXY: ${HTTP_PROXY:-}
         HTTPS_PROXY: ${HTTPS_PROXY:-}
         NO_PROXY: ${NO_PROXY:-}
-    container_name: toto_backend
+    container_name: mycelium-woods-roots-backend
     environment:
-      DATABASE_URL: postgres://toto:toto_secret@db:5432/toto_db
+      DATABASE_URL: postgres://mycelium:mycelium_secret@db:5432/mycelium_woods_roots_db
       JWT_SECRET: change_me_in_production
       PORT: 3000
     ports:
@@ -45,7 +45,7 @@ services:
         HTTP_PROXY: ${HTTP_PROXY:-}
         HTTPS_PROXY: ${HTTPS_PROXY:-}
         NO_PROXY: ${NO_PROXY:-}
-    container_name: toto_frontend
+    container_name: mycelium-woods-roots-frontend
     ports:
       - "8080:80"
     depends_on:
