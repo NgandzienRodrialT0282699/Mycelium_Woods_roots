@@ -1,5 +1,5 @@
 /* ============================
-   TOTO — Main app logic
+   MYCELIUM — Main app logic
    ============================ */
 
 let currentUser = null;
@@ -8,8 +8,13 @@ let previousView = null;
 
 /* ---- Init ---- */
 function init() {
-  const saved = localStorage.getItem("toto_token");
-  const savedUser = localStorage.getItem("toto_user");
+  // Load saved theme
+  const savedTheme = localStorage.getItem("mycelium_theme") || "dark";
+  document.documentElement.setAttribute("data-theme", savedTheme);
+  updateThemeIcons(savedTheme);
+
+  const saved = localStorage.getItem("mycelium_token");
+  const savedUser = localStorage.getItem("mycelium_user");
   if (saved && savedUser) {
     currentUser = JSON.parse(savedUser);
     Api.setToken(saved);
@@ -18,6 +23,23 @@ function init() {
     showAuth();
   }
   bindEvents();
+}
+
+function updateThemeIcons(theme) {
+  const sunIcon = document.querySelector(".theme-icon-sun");
+  const moonIcon = document.querySelector(".theme-icon-moon");
+  if (sunIcon && moonIcon) {
+    sunIcon.classList.toggle("hidden", theme === "light");
+    moonIcon.classList.toggle("hidden", theme === "dark");
+  }
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute("data-theme") || "dark";
+  const next = current === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  localStorage.setItem("mycelium_theme", next);
+  updateThemeIcons(next);
 }
 
 /* ---- Auth ---- */
@@ -33,15 +55,15 @@ function showApp() {
 }
 
 function saveSession(token, user) {
-  localStorage.setItem("toto_token", token);
-  localStorage.setItem("toto_user", JSON.stringify(user));
+  localStorage.setItem("mycelium_token", token);
+  localStorage.setItem("mycelium_user", JSON.stringify(user));
   Api.setToken(token);
   currentUser = user;
 }
 
 function logout() {
-  localStorage.removeItem("toto_token");
-  localStorage.removeItem("toto_user");
+  localStorage.removeItem("mycelium_token");
+  localStorage.removeItem("mycelium_user");
   Api.setToken(null);
   currentUser = null;
   showAuth();
@@ -248,7 +270,7 @@ function showEditProfile(user) {
   Api.updateProfile(display.trim(), bio.trim())
     .then(updated => {
       currentUser.display_name = updated.display_name;
-      localStorage.setItem("toto_user", JSON.stringify(currentUser));
+      localStorage.setItem("mycelium_user", JSON.stringify(currentUser));
       loadProfile(updated.username);
     })
     .catch(e => alert(e.message));
@@ -390,6 +412,14 @@ function bindEvents() {
   document.getElementById("back-btn").addEventListener("click", () => {
     navigateTo(previousView || "feed");
   });
+
+  // Logout button
+  document.getElementById("nav-logout").addEventListener("click", () => {
+    if (confirm("Se déconnecter ?")) logout();
+  });
+
+  // Theme toggle
+  document.getElementById("nav-theme").addEventListener("click", toggleTheme);
 
   // Keyboard: close modal on Escape
   document.addEventListener("keydown", e => {

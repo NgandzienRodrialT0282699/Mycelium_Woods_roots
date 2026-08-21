@@ -15,6 +15,18 @@ app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/users", userRoutes);
 
+app.get("/api", (_req, res) => {
+  res.json({
+    message: "Mycelium API v1",
+    endpoints: {
+      auth: "/api/auth",
+      posts: "/api/posts",
+      users: "/api/users",
+      health: "/api/health"
+    }
+  });
+});
+
 app.get("/api/health", (_req, res) => res.json({ status: "ok" }));
 
 app.listen(PORT, () => {
