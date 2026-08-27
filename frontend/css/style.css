@@ -1,20 +1,42 @@
 /* ============================
-   TOTO — Mobile-first CSS
+   MYCELIUM — Mobile-first CSS
+   Theme: Mycelium-inspired (underground root network)
    ============================ */
 
 :root {
-  --bg: #0f0f1a;
-  --bg2: #1a1a2e;
-  --bg3: #16213e;
-  --accent: #e94560;
-  --accent2: #0f3460;
-  --text: #e8e8f0;
-  --text-muted: #888aa0;
-  --border: #2a2a3e;
+  /* Dark mode (default) — Forest earth tones with green */
+  --bg: #0d1512;
+  --bg2: #1a2420;
+  --bg3: #263530;
+  --accent: #4a9c6d;
+  --accent2: #2d5a3d;
+  --accent-hover: #5cb87f;
+  --text: #e8f0eb;
+  --text-muted: #8aa896;
+  --border: #2d3d35;
+  --danger: #c45a5a;
+  --warning: #c4a35a;
+  --success: #4a9c6d;
   --radius: 12px;
   --nav-h: 60px;
   --header-h: 52px;
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Light mode — Clean white with earth/green accents */
+[data-theme="light"] {
+  --bg: #f8faf9;
+  --bg2: #eef3f0;
+  --bg3: #e0e8e3;
+  --accent: #2d7a4d;
+  --accent2: #b8d4c4;
+  --accent-hover: #236b3f;
+  --text: #1a2420;
+  --text-muted: #5a6d62;
+  --border: #d0ddd5;
+  --danger: #a63d3d;
+  --warning: #8b6914;
+  --success: #2d7a4d;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -209,6 +231,10 @@ textarea {
 
 .nav-btn.active { color: var(--accent); }
 
+/* Theme toggle icons */
+.theme-icon-sun, .theme-icon-moon { display: block; }
+.theme-icon-sun.hidden, .theme-icon-moon.hidden { display: none; }
+
 /* Main scrollable area */
 .main-content {
   flex: 1;
@@ -227,10 +253,14 @@ textarea {
   display: flex;
   align-items: center;
   padding: 0 16px;
-  background: rgba(15, 15, 26, 0.92);
+  background: rgba(13, 21, 18, 0.92);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
   z-index: 50;
+}
+
+[data-theme="light"] .view-header {
+  background: rgba(248, 250, 249, 0.92);
 }
 
 .view-header h2 {
@@ -494,7 +524,7 @@ textarea {
     gap: 12px;
   }
   .nav-btn span { display: inline; }
-  .nav-btn.active { background: rgba(233,69,96,0.12); }
+  .nav-btn.active { background: rgba(74, 156, 109, 0.15); }
 
   .main-content { margin-left: 220px; }
 }
