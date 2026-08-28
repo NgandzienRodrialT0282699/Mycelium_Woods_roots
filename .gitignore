@@ -1,0 +1,28 @@
+# ---- Node.js ----
+node_modules/
+**/node_modules/
+
+# ---- Environnement ----
+.env
+.env.*
+!.env.example
+
+# ---- Docker ----
+docker-compose.override.yml
+*.log
+
+# ---- IDE ----
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+
+# ---- Logs ----
+logs/
+*.log
+npm-debug.log*
