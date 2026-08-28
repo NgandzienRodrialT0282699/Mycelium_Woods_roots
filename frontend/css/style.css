@@ -27,6 +27,13 @@
   --safe-l: env(safe-area-inset-left, 0px);
   --safe-r: env(safe-area-inset-right, 0px);
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Racines / mycélium (thème sombre) */
+  --root-line: #4a9c6d;
+  --root-op: 0.16;
+  --root-bg-op: 0.05;
+  --root-glow: 0 0 10px rgba(92, 184, 127, 0.35);
+  --card-shadow: 0 6px 22px rgba(0, 0, 0, 0.22);
+  --header-bg: rgba(13, 21, 18, 0.72);
 }
 
 /* Light mode — Clean white with earth/green accents */
@@ -43,7 +50,15 @@
   --danger: #a63d3d;
   --warning: #8b6914;
   --success: #2d7a4d;
+  /* Racines / mycélium (thème clair) */
+  --root-line: #3d6b4f;
+  --root-op: 0.22;
+  --root-bg-op: 0.07;
+  --root-glow: none;
+  --card-shadow: 0 6px 18px rgba(26, 36, 32, 0.07);
+  --header-bg: rgba(248, 250, 249, 0.72);
 }
+
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -532,6 +547,7 @@ textarea {
   .nav-btn span { display: none; }
   .nav-btn svg { width: 24px; height: 24px; }
   .post-content, .post-actions { margin-left: 0; }
+  .post-item::after { display: none; } /* racine masquée : contenu repasse en pleine largeur */
   .post-actions { gap: 10px 16px; }
 }
 
@@ -646,4 +662,157 @@ textarea {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ============================
+   REDESIGN IMMERSIF — logo chêne & racines
+   (motifs décoratifs, jamais interactifs)
+   ============================ */
+
+#screen-auth,
+#screen-app { position: relative; z-index: 1; }
+
+/* ---- Logo sur l'écran de connexion ---- */
+.brand-mark {
+  width: clamp(64px, 22vw, 92px);
+  height: auto;
+  margin: 0 auto -8px;
+  display: block;
+  color: var(--accent);
+  filter: var(--root-glow);
+}
+
+/* ---- Logo dans l'en-tête du fil ---- */
+.header-mark {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+/* ---- Logo dans la navigation ---- */
+.nav-brand { display: none; }
+.nav-brand svg { width: 30px; height: 30px; color: var(--accent); flex-shrink: 0; }
+.nav-brand b {
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---- En-tête translucide (style immersif) ---- */
+.view-header,
+[data-theme="light"] .view-header {
+  background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+}
+
+/* ---- Posts en cartes surélevées ---- */
+.post-list { gap: 12px; padding: 12px var(--gutter) 20px; }
+
+.post-item {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  box-shadow: var(--card-shadow);
+  position: relative;
+}
+.post-item:hover { background: var(--bg3); }
+
+/* Racine verticale reliant l'avatar d'un post à l'avatar du suivant.
+   Avatar : haut 14px, gauche 16px, taille 38px → centre x = 35px, bas = 52px.
+   La ligne descend jusqu'au sommet de l'avatar du post suivant (gap 12px). */
+.post-item::after {
+  content: "";
+  position: absolute;
+  left: 34px;
+  top: 52px;
+  bottom: -13px;
+  width: 2px;
+  background:
+    radial-gradient(circle 3px at 1px 45%, var(--root-line) 98%, transparent),
+    linear-gradient(var(--root-line), var(--root-line));
+  background-size: 2px 100%, 2px 100%;
+  background-repeat: no-repeat;
+  opacity: var(--root-op);
+  pointer-events: none;
+  z-index: 0;
+}
+.post-item:last-child::after { display: none; }
+
+/* L'avatar passe au-dessus de la racine */
+.post-avatar { position: relative; z-index: 1; }
+
+/* Anneau de marque sur les avatars */
+.post-avatar,
+.user-avatar,
+.profile-avatar {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.post-avatar { box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 45%, transparent), var(--root-glow); }
+
+/* Cartes utilisateurs & profil cohérentes */
+.user-list { gap: 10px; padding: 12px var(--gutter) 20px; }
+.user-item {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+}
+.user-item:hover { background: var(--bg3); }
+
+.profile-card {
+  margin: 12px var(--gutter);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+}
+
+/* États vides : illustration racine légère */
+.empty-state {
+  position: relative;
+  padding-top: 72px;
+}
+.empty-state::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 52px;
+  background: currentColor;
+  color: var(--root-line);
+  opacity: var(--root-op);
+  pointer-events: none;
+  -webkit-mask: url("/assets/logo.svg") center / contain no-repeat;
+  mask: url("/assets/logo.svg") center / contain no-repeat;
+}
+
+/* Nav : marque visible dès le rail latéral */
+@media (min-width: 640px) {
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 8px 16px;
+    min-height: 44px;
+  }
+  .nav-brand b { display: none; }
+  .bottom-nav { background: var(--bg2); }
+}
+
+@media (min-width: 960px) {
+  .nav-brand {
+    justify-content: flex-start;
+    padding: 4px 12px 20px;
+  }
+  .nav-brand b { display: inline; }
 }
