@@ -16,8 +16,10 @@ Un clone Twitter léger, mobile-first, conteneurisé avec Docker.
 ```bash
 docker-compose up --build
 docker-compose up
-docker-compose down -v && docker-compose up --build
-docker-compose down -v && docker-compose up --build
+docker-compose down -v && docker-compose up --build --warning, supprime la base
+docker-compose down && docker-compose up --build
+docker-compose down
+docker-compose up --build
 
 docker rm -f
 ```

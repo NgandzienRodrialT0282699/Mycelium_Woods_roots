@@ -3,20 +3,36 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#0d1512" />
     <meta name="description" content="Mycelium — réseau social léger" />
     <title>Mycelium</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
     <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body>
 
+
+
+
     <!-- ====== AUTH SCREEN ====== -->
     <div id="screen-auth" class="screen active">
         <div class="auth-container">
+            <svg class="brand-mark" aria-hidden="true" focusable="false" viewBox="0 0 64 64" fill="none"
+                stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path
+                    d="M32 6c-5.6 0-9.4 3.3-10.4 7.2C17 14 14 17.5 14 21.6c0 4.3 3.2 7.8 7.4 8.3M32 6c5.6 0 9.4 3.3 10.4 7.2C47 14 50 17.5 50 21.6c0 4.3-3.2 7.8-7.4 8.3" />
+                <path d="M21.4 29.9c1.6 3.1 5.5 5.1 10.6 5.1s9-2 10.6-5.1" />
+                <path d="M32 14v26" />
+                <path d="M32 22l-5-4M32 27l5-4" />
+                <path d="M32 40v18" />
+                <path d="M32 42c-4 2-6 5-7 9s-2.5 6-5 7M32 42c4 2 6 5 7 9s2.5 6 5 7" />
+                <path d="M32 48c-2.6 1.6-4 4-4.6 7M32 48c2.6 1.6 4 4 4.6 7" />
+            </svg>
             <h1 class="logo">Mycelium</h1>
             <p class="tagline">Connectés par les racines.</p>
+
 
             <div class="tabs">
                 <button class="tab active" data-tab="login">Connexion</button>
@@ -51,6 +67,21 @@
 
         <!-- Nav bottom (mobile-first) -->
         <nav class="bottom-nav">
+            <div class="nav-brand" aria-hidden="true">
+                <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path
+                        d="M32 6c-5.6 0-9.4 3.3-10.4 7.2C17 14 14 17.5 14 21.6c0 4.3 3.2 7.8 7.4 8.3M32 6c5.6 0 9.4 3.3 10.4 7.2C47 14 50 17.5 50 21.6c0 4.3-3.2 7.8-7.4 8.3" />
+                    <path d="M21.4 29.9c1.6 3.1 5.5 5.1 10.6 5.1s9-2 10.6-5.1" />
+                    <path d="M32 14v26" />
+                    <path d="M32 22l-5-4M32 27l5-4" />
+                    <path d="M32 40v18" />
+                    <path d="M32 42c-4 2-6 5-7 9s-2.5 6-5 7M32 42c4 2 6 5 7 9s2.5 6 5 7" />
+                    <path d="M32 48c-2.6 1.6-4 4-4.6 7M32 48c2.6 1.6 4 4 4.6 7" />
+                </svg>
+                <b>Mycelium</b>
+            </div>
+
             <button class="nav-btn active" data-view="feed" aria-label="Fil d'actu">
                 <svg viewBox="0 0 24 24">
                     <path d="M3 12l9-9 9 9M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" />
@@ -112,8 +143,20 @@
             <!-- Feed view -->
             <div id="view-feed" class="view active">
                 <header class="view-header">
+                    <svg class="header-mark" aria-hidden="true" focusable="false" viewBox="0 0 64 64" fill="none"
+                        stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M32 6c-5.6 0-9.4 3.3-10.4 7.2C17 14 14 17.5 14 21.6c0 4.3 3.2 7.8 7.4 8.3M32 6c5.6 0 9.4 3.3 10.4 7.2C47 14 50 17.5 50 21.6c0 4.3-3.2 7.8-7.4 8.3" />
+                        <path d="M21.4 29.9c1.6 3.1 5.5 5.1 10.6 5.1s9-2 10.6-5.1" />
+                        <path d="M32 14v26" />
+                        <path d="M32 22l-5-4M32 27l5-4" />
+                        <path d="M32 40v18" />
+                        <path d="M32 42c-4 2-6 5-7 9s-2.5 6-5 7M32 42c4 2 6 5 7 9s2.5 6 5 7" />
+                        <path d="M32 48c-2.6 1.6-4 4-4.6 7M32 48c2.6 1.6 4 4 4.6 7" />
+                    </svg>
                     <h2>Fil d'actualité</h2>
                 </header>
+
                 <div id="feed-list" class="post-list">
                     <div class="loading">Chargement…</div>
                 </div>
